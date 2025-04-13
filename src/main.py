@@ -11,7 +11,7 @@ application.config['CORS_HEADERS'] = 'Content-Type'
 
 
 #CONFIGURACION DE LA PAGINA
-@application.route("/api")
+@application.route("/api", methods=["GET"])
 def inicio():
     return abrir_html()
 
@@ -21,6 +21,13 @@ def abrir_html():
         with open("src/index.html", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        return "<bold>Error 404 </bold>"
+        return "<bold>Archivo no encontrado</bold>"
 
-# RUTA PARA AGREGAR 
+# RUTA PARA AGREGAR LA CATEGORIA
+@application.route("/api/agregar_categoria", methods=["POST"])
+def agregar_categoria():
+    #RECOGEMOS LOS DATOS DEL FORMULARIO ENVIADO 
+    BLABLA = request.form.get("BLABLA")
+    BLABLA = request.form.get("BLABLA")
+    BLABLA = request.form.get("BLABLA")
+    BLABLA = request.form.get("BLABLA")
