@@ -20,6 +20,17 @@ def inicio():
     except FileNotFoundError:
         return "<bold>Archivo no encontrado</bold>"
 
+#  BUSCADOR DE CATEGORIAS 
+@application.route("/search", methods=["GET", "POST"])
+def buscador():
+    datos_usuario = request.args.get("query")
+
+    if datos_usuario is None:
+        return "No hay datos que buscar"
+       
+    return "Resultados de la busqueda " + str(datos_usuario)
+
+
 # RUTA PARA AGREGAR UNA NUEVA PELICULA
 @application.route("/agregar", methods=["POST"])
 def agregar_pelicula():
@@ -48,16 +59,6 @@ if __name__ == "__main__":
     application.run(debug=True)
 
 
-
-#  BUSCADOR DE CATEGORIAS 
-@application.route("/search", methods=["GET", "POST"])
-def buscador():
-    datos_usuario = request.args.get("query")
-
-    if datos_usuario is None:
-        return "No hay datos que buscar"
-       
-    return "Resultados de la busqueda " + str(datos_usuario)
 
 # CONEXION A LA BASE DE DATOS
 @application.route("/peliculas", methods=["GET"])
