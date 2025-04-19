@@ -10,16 +10,13 @@ Esta API está desarrollada en Flask y permite gestionar diferentes rutas, inclu
 APIs/
 ├── src/
 │   ├── main.py               # Código principal de la API
-│   ├── templates/            # Carpeta para los archivos HTML
-│   │   └── index.html        # Página principal de la API
+│   ├── index.html            # Página principal de la API
+│   ├── Database1.db          # Base de datos de de la API de SQLITE3
+│   ├── Peliculas.sql         # Base de datos de la API 
+│   ├── sqlite3.exe           # Programa de SQL
+│   ├── style.css             # Hoja de estilos de CSS
 ├── README.md                 # Documentación del proyecto
 ```
-
----
-
-## **URL**
-1. **http://127.0.0.1:5000/**
-
 ---
 
 ## **Requisitos Previos**
@@ -170,5 +167,15 @@ El archivo HTML se renderiza utilizando la función `open`. Asegúrate de que lo
    ```bash
    flask --app main.py --debug run
    ```
+
+---
+## **Las Fuentes**
+- https://www.youtube.com/watch?v=4FDVzF0Z9Yo (***YouTube***)
+- https://www.youtube.com/watch?v=riijt-xcqYI&t=4147s (***YouTube***)
+- https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files (***Documentacion de Python***)
+- https://drive.google.com/file/d/1GberBnvKMNf3Mwr4bulGbAunnul7UriX/view (***Intalacion de Flask y Cors y ENV***)
+- https://flask.palletsprojects.com/en/latest/api/#flask.Request.form (***Flask***)
+- https://flask.palletsprojects.com/en/latest/patterns/wtforms/ (***Flask***)
+- https://www.youtube.com/watch?v=qiFsAIRwIp8&t=1s (***YouTube***)
 
 ---
