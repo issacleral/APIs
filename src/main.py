@@ -28,7 +28,7 @@ def abrir_html():
 @application.route("/conexion", methods=["GET", "POST"])
 def conexion():
     conexion = SQLiteConnection("Database1.db")
-    classes = conexion.execute_query("SELECT * FROM clases ")
+    classes = conexion.execute_query("SELECT * FROM peliculas ")
     return classes
 
 #  BUSCADOR DE CATEGORIAS 
