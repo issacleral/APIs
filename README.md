@@ -1,7 +1,7 @@
 # **Documentación de la API**
 
 ## **Descripción**
-Esta API está desarrollada en Flask y permite gestionar diferentes rutas, incluyendo la visualización de una página HTML, la conexión a una base de datos SQLite, la búsqueda de categorías y la edición de nuevas categorías mediante un formulario. Además, utiliza CORS para manejar solicitudes desde diferentes orígenes.
+Esta API está desarrollada en Flask y permite gestionar diferentes rutas, incluyendo la visualización de una página HTML, la conexión a una base de datos SQLite, la búsqueda de categorías y la adición de nuevas películas mediante un formulario. Además, utiliza CORS para manejar solicitudes desde diferentes orígenes.
 
 ---
 
@@ -14,6 +14,11 @@ APIs/
 │   │   └── index.html        # Página principal de la API
 ├── README.md                 # Documentación del proyecto
 ```
+
+---
+
+## **URL**
+1. **http://127.0.0.1:5000/**
 
 ---
 
@@ -57,20 +62,52 @@ APIs/
 3. Abre tu navegador y accede a `http://127.0.0.1:5000`.
 
 ---
+## **Base De Datos**
+```sql
+
+  CREATE TABLE peliculas (
+      id INTEGER PRIMARY KEY,
+      titulo VARCHAR(10),
+      duracion SMALLINT,
+      fecha_estreno DATE
+  );
+
+
+  INSERT INTO peliculas (id, titulo, duracion, fecha_estreno) VALUES
+  (1, 'Parasite', 97, '2019-12-03'),
+  (2, 'Enemigo al acecho', 130, '2009-04-25'),
+  (3, 'American Paradise', 141, '2002-12-01'),
+  (4, 'Antes que anochezca', 102, '2007-11-04'),
+  (5, 'Inglorious Bastards', 105, '2009-08-13'),
+  (6, 'Training Day', 135, '2001-01-18'),
+  (7, 'Pedro Navaja', 114, '1984-10-03'),
+  (8, 'Gladiator', 215, '2000-04-10'),
+  (9, 'The Patriot', 182, '1995-06-21');
+
+  SELECT * FROM peliculas;
+```
+
+---
 
 ## **Rutas Disponibles**
 
 ### **1. `/`**
-- **Método**: `GET`, `POST`
+- **Método**: `GET`
 - **Descripción**: Renderiza la página principal (`index.html`).
 - **Respuesta**: Devuelve el contenido del archivo HTML o un mensaje de error si el archivo no se encuentra.
 
 ---
 
-### **2. `/conexion`**
-- **Método**: `GET`
-- **Descripción**: Conecta a la base de datos SQLite y ejecuta una consulta para obtener todas las clases.
-- **Respuesta**: Devuelve los resultados de la consulta en formato JSON.
+### **2. `/agregar`**
+- **Método**: `POST`
+- **Descripción**: Permite agregar una nueva película a la base de datos.
+- **Parámetros**:
+  - `titulo`: Título de la película.
+  - `duracion`: Duración de la película (en minutos).
+  - `fecha_estreno`: Fecha de estreno de la película.
+- **Respuesta**:
+  - Si los datos son válidos: `"Película agregada correctamente."`
+  - Si faltan datos: `"Error: Todos los campos son requeridos"`
 
 ---
 
@@ -80,23 +117,20 @@ APIs/
 - **Parámetros**:
   - `query`: El término de búsqueda proporcionado por el usuario.
 - **Respuesta**:
-  - Si no se proporciona un término de búsqueda: `"No hay datos que buscar"`.
-  - Si se proporciona un término de búsqueda: `"Resultados de la búsqueda <query>"`.
+  - Si no se proporciona un término de búsqueda: `"No hay datos que buscar"`
+  - Si se proporciona un término de búsqueda: `"Resultados de la búsqueda <query>"`
 
 ---
 
-### **4. `/api/agregar_categoria`**
-- **Método**: `POST`
-- **Descripción**: Permite agregar una nueva categoría mediante un formulario.
-- **Parámetros**:
-  - `titulo`: Título de la categoría.
-  - `duracion`: Duración de la categoría.
-  - `fecha_estreno`: Fecha de estreno de la categoría.
-- **Respuesta**: (Actualmente no implementada completamente).
+### **4. `/peliculas`**
+- **Método**: `GET`
+- **Descripción**: Conecta a la base de datos SQLite y ejecuta una consulta para obtener todas las películas.
+- **Respuesta**: Devuelve los resultados de la consulta en formato JSON.
 
 ---
 
 ## **Configuración del Proyecto**
+
 ### **CORS**
 Se utiliza `flask-cors` para permitir solicitudes desde diferentes orígenes. La configuración está definida en el archivo `main.py`:
 ```python
@@ -111,6 +145,7 @@ El archivo HTML se renderiza utilizando la función `open`. Asegúrate de que lo
 ---
 
 ## **Estructura del Código**
+
 ### **Archivo `main.py`**
 - **Configuración de la aplicación**:
   ```python
@@ -120,26 +155,20 @@ El archivo HTML se renderiza utilizando la función `open`. Asegúrate de que lo
   ```
 - **Rutas principales**:
   - `/`: Renderiza el archivo `index.html`.
-  - `/conexion`: Ejecuta una consulta en la base de datos SQLite.
+  - `/agregar`: Permite agregar una nueva película.
   - `/search`: Permite realizar búsquedas basadas en un parámetro.
-  - `/api/agregar_categoria`: Recibe datos de un formulario para agregar una categoría.
-
----
-
-## **Notas**
-- Si el archivo `index.html` no se encuentra, se devuelve un mensaje de error: `"<bold>Archivo no encontrado</bold>"`.
-- Asegúrate de que el archivo `index.html` esté ubicado en la carpeta `templates`.
+  - `/peliculas`: Ejecuta una consulta en la base de datos SQLite para obtener todas las películas.
 
 ---
 
 ## **Comandos Útiles**
 - **Activar entorno virtual**:
-  ```bash
-  .\env\Scripts\activate
-  ```
+   ```bash
+   .\env\Scripts\activate
+   ```
 - **Ejecutar el servidor Flask**:
-  ```bash
-  flask --app main.py --debug run
-  ```
+   ```bash
+   flask --app main.py --debug run
+   ```
 
 ---
