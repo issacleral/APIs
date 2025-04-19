@@ -1,68 +1,263 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Buscador de Películas</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Película</title>
+    <style>
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px rgba(255, 0, 170, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 0, 170, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(255, 0, 170, 0.5); }
+        }
+
+        @keyframes particleMove {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(50px, 30px); }
+            50% { transform: translate(100px, 0); }
+            75% { transform: translate(50px, -30px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #ffffff;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: rgba(30, 30, 30, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #ff00aa;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 {
+            color: #ff00aa;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 0, 170, 0.5);
+            font-size: 2.2em;
+            animation: pulse 3s infinite;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #00ffff;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(45, 45, 45, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            color: #ffffff;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #ff00aa;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 0, 170, 0.5);
+            transform: scale(1.02);
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #ff00aa, #ff0066);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(45deg, #ff0066, #ff00aa);
+            box-shadow: 0 0 15px rgba(255, 0, 170, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .required-field::after {
+            content: " *";
+            color: #ff5555;
+            font-size: 1.2em;
+        }
+
+        option {
+            background-color: #2d2d2d;
+            color: #ffffff;
+        }
+
+        ::placeholder {
+            color: #888;
+            opacity: 1;
+        }
+
+        /* Partículas CSS */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 0;
+            animation: particleMove 15s infinite linear;
+        }
+
+        .particle:nth-child(1) {
+            width: 3px;
+            height: 3px;
+            top: 20%;
+            left: 10%;
+            background: rgba(255, 0, 170, 0.6);
+            animation-duration: 20s;
+        }
+        .particle:nth-child(2) {
+            width: 4px;
+            height: 4px;
+            top: 70%;
+            left: 80%;
+            background: rgba(0, 255, 255, 0.6);
+            animation-duration: 25s;
+            animation-delay: 2s;
+        }
+        .particle:nth-child(3) {
+            width: 2px;
+            height: 2px;
+            top: 40%;
+            left: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            animation-duration: 18s;
+            animation-delay: 1s;
+        }
+        .particle:nth-child(4) {
+            width: 5px;
+            height: 5px;
+            top: 60%;
+            left: 20%;
+            background: rgba(255, 0, 170, 0.5);
+            animation-duration: 22s;
+        }
+        .particle:nth-child(5) {
+            width: 3px;
+            height: 3px;
+            top: 30%;
+            left: 70%;
+            background: rgba(0, 255, 255, 0.5);
+            animation-duration: 17s;
+            animation-delay: 3s;
+        }
+
+        /* Efectos de la luz en el  CSS */
+        .light-effect {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,0,170,0.2) 0%, rgba(255,0,170,0) 70%);
+            z-index: 0;
+        }
+        .light-effect:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation: pulse 8s infinite;
+        }
+        .light-effect:nth-child(2) {
+            bottom: 15%;
+            right: 25%;
+            width: 300px;
+            height: 300px;
+            animation: pulse 10s infinite 2s;
+        }
+    </style>
 </head>
 <body>
-  <div class="contenedor">
-    <h1>Buscador de Películas</h1>
-
-    <div class="buscador">
-      <label for="peliculas">Selecciona una película:</label>
-      <select id="peliculas">
-        <option value="">-- Elige una película --</option>
-        <option value="Parasite">Parasite</option>
-        <option value="Enemigo al acecho">Enemigo al acecho</option>
-        <option value="American Paradise">American Paradise</option>
-        <option value="Antes que anochezca">Antes que anochezca</option>
-        <option value="Inglorious Bastards">Inglorious Bastards</option>
-        <option value="Training Day">Training Day</option>
-        <option value="Pedro Navaja">Pedro Navaja</option>
-        <option value="Gladiator">Gladiator</option>
-        <option value="The Patriot">The Patriot</option>
-      </select>
+    <div class="light-effect"></div>
+    <div class="light-effect"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    
+    <div class="container">
+        <h1>AGREGAR PELÍCULA</h1>
+        <form action="http://127.0.0.1:5000/agregar_categoria" method="post">
+            <div class="form-group">
+                <label for="titulo" class="required-field">Título:</label>
+                <input type="text" id="titulo" name="titulo" required placeholder="Ej: El Padrino">
+            </div>
+            
+            <div class="form-group">
+                <label for="duracion" class="required-field">Duración (minutos):</label>
+                <input type="number" id="duracion" name="duracion" required min="1" placeholder="120">
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha_estreno" class="required-field">Fecha de Estreno:</label>
+                <input type="date" id="fecha_estreno" name="fecha_estreno" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="genero">Género:</label>
+                <select id="genero" name="genero">
+                    <option value="">Seleccione un género</option>
+                    <option value="accion">Acción</option>
+                    <option value="comedia">Comedia</option>
+                    <option value="drama">Drama</option>
+                    <option value="ciencia_ficcion">Ciencia Ficción</option>
+                    <option value="terror">Terror</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn-submit">GUARDAR PELÍCULA</button>
+        </form>
     </div>
-
-    <div class="info">
-      <div class="apartado">
-        <h2>Fecha de lanzamiento</h2>
-        <p id="fecha"></p>
-      </div>
-      <div class="apartado">
-        <h2>Duración (minutos)</h2>
-        <p id="duracion"></p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const datosPeliculas = {
-      "Parasite": { fecha: "2019-12-03", duracion: 97 },
-      "Enemigo al acecho": { fecha: "2009-04-25", duracion: 130 },
-      "American Paradise": { fecha: "2002-12-01", duracion: 141 },
-      "Antes que anochezca": { fecha: "2007-11-04", duracion: 102 },
-      "Inglorious Bastards": { fecha: "2009-08-13", duracion: 105 },
-      "Training Day": { fecha: "2001-01-18", duracion: 135 },
-      "Pedro Navaja": { fecha: "1984-10-03", duracion: 114 },
-      "Gladiator": { fecha: "2000-04-10", duracion: 215 },
-      "The Patriot": { fecha: "1995-06-21", duracion: 182 }
-    };
-
-    document.getElementById("peliculas").addEventListener("change", function () {
-      const seleccion = this.value;
-      const fecha = document.getElementById("fecha");
-      const duracion = document.getElementById("duracion");
-
-      if (datosPeliculas[seleccion]) {
-        fecha.textContent = datosPeliculas[seleccion].fecha;
-        duracion.textContent = datosPeliculas[seleccion].duracion;
-      } else {
-        fecha.textContent = "";
-        duracion.textContent = "";
-      }
-    });
-  </script>
 </body>
 </html>

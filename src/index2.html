@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscador de Películas</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+    background-color: #1c1c1c;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .contenedor {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #0a84ff;
+  }
+
+  h1 {
+    text-align: center;
+    color: #0a84ff;
+  }
+
+  .buscador {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  label {
+    font-size: 1.2em;
+    margin-right: 10px;
+  }
+
+  select {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #333;
+    color: #fff;
+  }
+
+  .info {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .apartado {
+    background-color: #3a3a3a;
+    padding: 15px;
+    border-left: 5px solid #0a84ff;
+    border-radius: 5px;
+  }
+
+  .apartado h2 {
+    margin-top: 0;
+    color: #0a84ff;
+  }
+
+  .apartado p {
+    font-size: 1.1em;
+  }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Buscador de Películas</h1>
+
+    <div class="buscador">
+      <label for="peliculas">Selecciona una película:</label>
+      <select id="peliculas">
+        <option value="">-- Elige una película --</option>
+        <option value="Parasite">Parasite</option>
+        <option value="Enemigo al acecho">Enemigo al acecho</option>
+        <option value="American Paradise">American Paradise</option>
+        <option value="Antes que anochezca">Antes que anochezca</option>
+        <option value="Inglorious Bastards">Inglorious Bastards</option>
+        <option value="Training Day">Training Day</option>
+        <option value="Pedro Navaja">Pedro Navaja</option>
+        <option value="Gladiator">Gladiator</option>
+        <option value="The Patriot">The Patriot</option>
+      </select>
+    </div>
+
+    <div class="info">
+      <div class="apartado">
+        <h2>Fecha de lanzamiento</h2>
+        <p id="fecha"></p>
+      </div>
+      <div class="apartado">
+        <h2>Duración (minutos)</h2>
+        <p id="duracion"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const datosPeliculas = {
+      "Parasite": { fecha: "2019-12-03", duracion: 97 },
+      "Enemigo al acecho": { fecha: "2009-04-25", duracion: 130 },
+      "American Paradise": { fecha: "2002-12-01", duracion: 141 },
+      "Antes que anochezca": { fecha: "2007-11-04", duracion: 102 },
+      "Inglorious Bastards": { fecha: "2009-08-13", duracion: 105 },
+      "Training Day": { fecha: "2001-01-18", duracion: 135 },
+      "Pedro Navaja": { fecha: "1984-10-03", duracion: 114 },
+      "Gladiator": { fecha: "2000-04-10", duracion: 215 },
+      "The Patriot": { fecha: "1995-06-21", duracion: 182 }
+    };
+
+    document.getElementById("peliculas").addEventListener("change", function () {
+      const seleccion = this.value;
+      const fecha = document.getElementById("fecha");
+      const duracion = document.getElementById("duracion");
+
+      if (datosPeliculas[seleccion]) {
+        fecha.textContent = datosPeliculas[seleccion].fecha;
+        duracion.textContent = datosPeliculas[seleccion].duracion;
+      } else {
+        fecha.textContent = "";
+        duracion.textContent = "";
+      }
+    });
+  </script>
+</body>
+</html>
