@@ -45,7 +45,6 @@ def buscador():
 @application.route("/api/agregar_categoria", methods=["POST"])
 def agregar_categoria():
     #RECOGEMOS LOS DATOS DEL FORMULARIO ENVIADO 
-    BLABLA = request.form.get("BLABLA")
-    BLABLA = request.form.get("BLABLA")
-    BLABLA = request.form.get("BLABLA")
-    BLABLA = request.form.get("BLABLA")
+    titulo = request.form.get("titulo")
+    duracion = request.form.get("duracion")
+    fecha_estreno = request.form.get("fecha_estreno")
