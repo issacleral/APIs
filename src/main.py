@@ -11,7 +11,7 @@ application.config['CORS_HEADERS'] = 'Content-Type'
 
 
 #CONFIGURACION DE LA PAGINA
-@application.route("/", methods=["GET", "POST"])
+@application.route("/", methods=["GET"])
 def inicio():
     return abrir_html()
 
