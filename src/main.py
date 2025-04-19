@@ -10,40 +10,19 @@ cors = CORS(application)
 application.config['CORS_HEADERS'] = 'Content-Type' 
 
 
-#CONFIGURACION DE LA PAGINA
+#CONFIGURACION DE LA PAGINA DE INICIO
 @application.route("/", methods=["GET"])
 def inicio():
-    return abrir_html()
-
-#ABRIR EL HTML 
-def abrir_html():
+    # LEEMOS EL ARCHIVO HTML Y LO RETORNAMOS COMO RESPUESTA
     try:
         with open("index.html", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
         return "<bold>Archivo no encontrado</bold>"
-    
 
-# CONEXION A LA BASE DE DATOS
-@application.route("/conexion", methods=["GET", "POST"])
-def conexion():
-    conexion = SQLiteConnection("Database1.db")
-    classes = conexion.execute_query("SELECT * FROM peliculas ")
-    return classes
-
-#  BUSCADOR DE CATEGORIAS 
-@application.route("/search", methods=["GET", "POST"])
-def buscador():
-    datos_usuario = request.args.get("query")
-
-    if datos_usuario is None:
-        return "No hay datos que buscar"
-       
-    return "Resultados de la busqueda " + str(datos_usuario)
-
-# RUTA PARA AGREGAR LA CATEGORIA
-@application.route("/agregar_categoria", methods=["GET", "POST"])
-def agregar_categoria():
+# RUTA PARA AGREGAR UNA NUEVA PELICULA
+@application.route("/agregar", methods=["POST"])
+def agregar_pelicula():
     #RECOGEMOS LOS DATOS DEL FORMULARIO ENVIADO 
     titulo = request.form.get("titulo")
     duracion = request.form.get("duracion")
@@ -52,7 +31,7 @@ def agregar_categoria():
 
  # VALIDAMOS LOS CAMPOS QUE NO ESTEN VACIOS EN EL FORMULARIO
 
-    if not (titulo or duracion or fecha_estreno):
+    if not (titulo and duracion and fecha_estreno):
         return "Error: Todos los campos son requeridos"
     conexion = SQLiteConnection("Database1.db")
 
@@ -67,3 +46,22 @@ def agregar_categoria():
 
 if __name__ == "__main__":
     application.run(debug=True)
+
+
+
+#  BUSCADOR DE CATEGORIAS 
+@application.route("/search", methods=["GET", "POST"])
+def buscador():
+    datos_usuario = request.args.get("query")
+
+    if datos_usuario is None:
+        return "No hay datos que buscar"
+       
+    return "Resultados de la busqueda " + str(datos_usuario)
+
+# CONEXION A LA BASE DE DATOS
+@application.route("/peliculas", methods=["GET"])
+def conexion():
+    conexion = SQLiteConnection("Database1.db")
+    peliculas = conexion.execute_query("SELECT * FROM peliculas ")
+    return peliculas
