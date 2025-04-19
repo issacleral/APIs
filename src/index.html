@@ -1,25 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Buscador de Películas</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Agregar una película</h1>
-    <form action="http://127.0.0.1:5000/agregar_categoria" method="post">
+  <div class="contenedor">
+    <h1>Buscador de Películas</h1>
 
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" required><br><br>
+    <div class="buscador">
+      <label for="peliculas">Selecciona una película:</label>
+      <select id="peliculas">
+        <option value="">-- Elige una película --</option>
+        <option value="Parasite">Parasite</option>
+        <option value="Enemigo al acecho">Enemigo al acecho</option>
+        <option value="American Paradise">American Paradise</option>
+        <option value="Antes que anochezca">Antes que anochezca</option>
+        <option value="Inglorious Bastards">Inglorious Bastards</option>
+        <option value="Training Day">Training Day</option>
+        <option value="Pedro Navaja">Pedro Navaja</option>
+        <option value="Gladiator">Gladiator</option>
+        <option value="The Patriot">The Patriot</option>
+      </select>
+    </div>
 
-        <label for="duracion">Duración:</label>
-        <input type="number" id="duracion" name="duracion" required><br><br>
+    <div class="info">
+      <div class="apartado">
+        <h2>Fecha de lanzamiento</h2>
+        <p id="fecha"></p>
+      </div>
+      <div class="apartado">
+        <h2>Duración (minutos)</h2>
+        <p id="duracion"></p>
+      </div>
+    </div>
+  </div>
 
-        <label for="fecha_estreno">Fecha de Estreno:</label>
-        <input type="text" id="fecha_estreno" name="fecha_estreno" required><br><br>
-        <input type="submit" value="Agregar Película">
-    </form>
-    
+  <script>
+    const datosPeliculas = {
+      "Parasite": { fecha: "2019-12-03", duracion: 97 },
+      "Enemigo al acecho": { fecha: "2009-04-25", duracion: 130 },
+      "American Paradise": { fecha: "2002-12-01", duracion: 141 },
+      "Antes que anochezca": { fecha: "2007-11-04", duracion: 102 },
+      "Inglorious Bastards": { fecha: "2009-08-13", duracion: 105 },
+      "Training Day": { fecha: "2001-01-18", duracion: 135 },
+      "Pedro Navaja": { fecha: "1984-10-03", duracion: 114 },
+      "Gladiator": { fecha: "2000-04-10", duracion: 215 },
+      "The Patriot": { fecha: "1995-06-21", duracion: 182 }
+    };
+
+    document.getElementById("peliculas").addEventListener("change", function () {
+      const seleccion = this.value;
+      const fecha = document.getElementById("fecha");
+      const duracion = document.getElementById("duracion");
+
+      if (datosPeliculas[seleccion]) {
+        fecha.textContent = datosPeliculas[seleccion].fecha;
+        duracion.textContent = datosPeliculas[seleccion].duracion;
+      } else {
+        fecha.textContent = "";
+        duracion.textContent = "";
+      }
+    });
+  </script>
 </body>
 </html>
