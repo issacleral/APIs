@@ -85,7 +85,7 @@ APIs/
 
 ---
 
-### **4. `/`**
+### **4. `/api/agregar_categoria`**
 - **Método**: `POST`
 - **Descripción**: Permite agregar una nueva categoría mediante un formulario.
 - **Parámetros**:

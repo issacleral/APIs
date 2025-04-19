@@ -25,14 +25,14 @@ def abrir_html():
     
 
 # CONEXION A LA BASE DE DATOS
-@application.route("/conexion", methods=["GET"])
+@application.route("/conexion", methods=["GET", "POST"])
 def conexion():
     conexion = SQLiteConnection("Database1.db")
     classes = conexion.execute_query("SELECT * FROM clases ")
     return classes
 
 #  BUSCADOR DE CATEGORIAS 
-@application.route("/search", methods=["GET"])
+@application.route("/search", methods=["GET", "POST"])
 def buscador():
     datos_usuario = request.args.get("query")
 
@@ -42,7 +42,7 @@ def buscador():
     return "Resultados de la busqueda " + str(datos_usuario)
 
 # RUTA PARA AGREGAR LA CATEGORIA
-@application.route("/api/agregar_categoria", methods=["POST"])
+@application.route("/api/agregar_categoria", methods=["GET", "POST"])
 def agregar_categoria():
     #RECOGEMOS LOS DATOS DEL FORMULARIO ENVIADO 
     titulo = request.form.get("titulo")
