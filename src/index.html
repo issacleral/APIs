@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Pagina etc</h1>
-    <p>This is a simple HTML document.</p>
-    <button id="myButton">Clickea </button>
+    <h1>Agregar una película</h1>
+    <form action="http://127.0.0.1:5000/agregar_categoria" method="post">
 
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required><br><br>
+
+        <label for="duracion">Duración:</label>
+        <input type="number" id="duracion" name="duracion" required><br><br>
+
+        <label for="fecha_estreno">Fecha de Estreno:</label>
+        <input type="text" id="fecha_estreno" name="fecha_estreno" required><br><br>
+        <input type="submit" value="Agregar Película">
+    </form>
     
 </body>
 </html>

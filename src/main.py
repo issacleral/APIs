@@ -42,9 +42,28 @@ def buscador():
     return "Resultados de la busqueda " + str(datos_usuario)
 
 # RUTA PARA AGREGAR LA CATEGORIA
-@application.route("/api/agregar_categoria", methods=["GET", "POST"])
+@application.route("/agregar_categoria", methods=["GET", "POST"])
 def agregar_categoria():
     #RECOGEMOS LOS DATOS DEL FORMULARIO ENVIADO 
     titulo = request.form.get("titulo")
     duracion = request.form.get("duracion")
     fecha_estreno = request.form.get("fecha_estreno")
+
+
+ # VALIDAMOS LOS CAMPOS QUE NO ESTEN VACIOS EN EL FORMULARIO
+
+    if not (titulo or duracion or fecha_estreno):
+        return "Error: Todos los campos son requeridos"
+    conexion = SQLiteConnection("Database1.db")
+
+    conexion.execute_query(
+        "INSERT INTO peliculas(titulo, duracion, fecha_estreno) VALUES (?, ?, ?)",
+        [titulo, duracion, fecha_estreno],
+        commit = True
+    )
+    
+ 
+    return "Película agregada correctamente."
+
+if __name__ == "__main__":
+    application.run(debug=True)
