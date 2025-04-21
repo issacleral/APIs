@@ -13,11 +13,9 @@ APIs/
 │   │   ├── index.html        # HTML para añadir los cambios de peliculas
 │   │   ├── index2.html       # HTML original como tenia que quedar
 │   ├── main.py               # Código principal de la API
-│   ├── index.html            # Página principal de la API
-│   ├── Database1.db          # Base de datos de de la API de SQLITE3
+│   ├── Database1.db          # Base de datos de de la API en SQLITE3
 │   ├── Peliculas.sql         # Base de datos de la API 
 │   ├── sqlite3.exe           # Programa de SQL
-│   ├── style.css             # Hoja de estilos de CSS
 ├── README.md                 # Documentación del proyecto
 ```
 ---
