@@ -9,6 +9,9 @@ Esta API está desarrollada en Flask y permite gestionar diferentes rutas, inclu
 ```
 APIs/
 ├── src/
+│   ├── html/                 # Carpeta del HTML renderizado
+│   │   ├── index.html        # HTML para añadir los cambios de peliculas
+│   │   ├── index2.html       # HTML original como tenia que quedar
 │   ├── main.py               # Código principal de la API
 │   ├── index.html            # Página principal de la API
 │   ├── Database1.db          # Base de datos de de la API de SQLITE3
