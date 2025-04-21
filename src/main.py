@@ -15,7 +15,7 @@ application.config['CORS_HEADERS'] = 'Content-Type'
 def inicio():
     # LEEMOS EL ARCHIVO HTML Y LO RETORNAMOS COMO RESPUESTA
     try:
-        with open("index.html", encoding="utf-8") as f:
+        with open("html/index.html", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
         return "<bold>Archivo no encontrado</bold>"
