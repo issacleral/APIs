@@ -53,7 +53,7 @@ def agregar_pelicula():
     )
     
  
-    return "Película agregada correctamente."
+    return "<bold>Película agregada correctamente.</bold>"
 
 if __name__ == "__main__":
     application.run(debug=True)
