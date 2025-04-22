@@ -32,7 +32,7 @@ def buscador():
 
 
 # RUTA PARA AGREGAR UNA NUEVA PELICULA
-@application.route("/agregar", methods=["POST"])
+@application.route("/agregar", methods=["POST", "DELETE"])
 def agregar_pelicula():
     #RECOGEMOS LOS DATOS DEL FORMULARIO ENVIADO 
     titulo = request.form.get("titulo")
