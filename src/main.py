@@ -18,7 +18,7 @@ def inicio():
         with open("html/index.html", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        return "<bold>Archivo no encontrado</bold>"
+        return "<bold>Archivos no encontrados</bold>"
 
 #  BUSCADOR DE CATEGORIAS 
 @application.route("/search", methods=["GET", "POST"])
@@ -43,7 +43,7 @@ def agregar_pelicula():
  # VALIDAMOS LOS CAMPOS QUE NO ESTEN VACIOS EN EL FORMULARIO
 
     if not (titulo and duracion and fecha_estreno):
-        return "Error: Todos los campos son requeridos"
+        return "Error Los campos son requeridos"
     conexion = SQLiteConnection("Database1.db")
 
     conexion.execute_query(
